@@ -56,6 +56,10 @@ func (a *SocomArchive) GetEntry(index int) ([]byte, error) {
 		return nil, errors.New("index out of range")
 	}
 
+	if a.EntryHeaders[index].DataSize <= 0 {
+		return nil, errors.New("entry size out of range")
+	}
+
 	start := int(a.Header.GetDataOffset() + a.EntryHeaders[index].DataOffset)
 
 	data := make([]byte, a.EntryHeaders[index].DataSize)

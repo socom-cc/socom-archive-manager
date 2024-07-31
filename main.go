@@ -43,6 +43,28 @@ func loadArchive(this js.Value, p []js.Value) interface{} {
 	return nil
 }
 
+func getBytes(this js.Value, p []js.Value) interface{} {
+	if p[0].Type() != js.TypeNumber {
+		return nil
+	}
+
+	idx := p[0].Int()
+
+	data, err := archive.GetEntry(idx)
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	dataBytes := js.Global().Get("Uint8Array").New(len(data))
+	js.CopyBytesToJS(dataBytes, data)
+
+	retObj := js.Global().Get("Object").New()
+	retObj.Set("data", dataBytes)
+	retObj.Set("name", archive.EntryHeaders[idx].Name)
+
+	return retObj
+}
+
 func main() {
 	templates = template.Must(template.ParseFS(templateFolder, "templates/*.go.tmpl"))
 	templates = template.Must(templates.ParseFS(templateFolder, "templates/components/*.go.tmpl"))
@@ -57,9 +79,13 @@ func main() {
 	}
 
 	appDiv.Set("innerHTML", doc.String())
+	script := js.Global().Get("document").Call("createElement", "script")
+	script.Set("src", "v1.js")
+	appDiv.Call("appendChild", script)
 
 	socomObj := js.Global().Get("Object").New()
 	socomObj.Set("onload", js.FuncOf(loadArchive))
+	socomObj.Set("getBytes", js.FuncOf(getBytes))
 	js.Global().Set("socom", socomObj)
 
 	fmt.Println("Loaded WASM")
