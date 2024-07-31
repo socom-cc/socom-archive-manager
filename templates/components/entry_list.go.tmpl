@@ -1,0 +1,10 @@
+{{ define "components/entry-list" }}
+    <div class="flex flex-col w-full bg-slate-600 rounded-md">
+        {{range $v := .}}
+             <div class="flex flex-col p-4">
+                <div>Name: <span>{{$v.Name}}</span></div>
+                <div>Type: <span>{{$v.EntryType}}</span></div>
+             </div>
+        {{end}}
+    </div>
+{{ end }}

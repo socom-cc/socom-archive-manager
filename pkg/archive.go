@@ -89,8 +89,19 @@ func (a *SocomArchive) load() error {
 		if err := binary.Read(reader, binary.LittleEndian, &entryHeader); err != nil {
 			return err
 		}
+		li := 0
+		for idx, v := range entryHeader.Name {
+			if v == 0 {
+				li = idx
+				break
+			}
+		}
+
+		var name = make([]byte, li)
+		copy(name, entryHeader.Name[:li])
+
 		a.EntryHeaders = append(a.EntryHeaders, ZdbEntryHeader{
-			Name:       string(entryHeader.Name[:]),
+			Name:       string(name),
 			EntryType:  string(entryHeader.EntryType[:]),
 			Unk44:      entryHeader.Unk44,
 			DataOffset: entryHeader.DataOffset,

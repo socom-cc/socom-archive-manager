@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx tailwind build -i ./templates/main.css -o ./css/main.css",
-    "dev": "npx tailwind build -i ./templates/main.css -o ./css/main.css --watch"
+    "build": "npx tailwind build -i ./templates/main.css -o ./app/css/main.css",
+    "dev": "npx tailwind build -i ./templates/main.css -o ./app/css/main.css --watch"
   },
   "author": "",
   "license": "ISC",
