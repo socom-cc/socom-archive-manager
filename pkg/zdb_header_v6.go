@@ -1,5 +1,6 @@
 package socomarchive
 
+// ZdbHeaderV6 Based off of reverse engineer work done by Linblow (https://github.com/Linblow)
 type ZdbHeaderV6 struct {
 	HeaderSize     uint32
 	EntrySize      uint32

@@ -12,6 +12,7 @@ type ZdbHeader interface {
 	GetDataOffset() uint32
 }
 
+// ZdbEntryHeaderRaw Based off of reverse engineer work done by Linblow (https://github.com/Linblow)
 type ZdbEntryHeaderRaw struct {
 	Name       [64]byte
 	EntryType  [4]byte
