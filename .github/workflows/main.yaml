@@ -1,5 +1,5 @@
 on: push
-name: Deploy ChipStation
+name: Deploy Socom Archive Manager
 jobs:
   web-deploy:
     name: Deploy
@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: ${{ matrix.go-version }}
-      - name: Build ChipStation
+      - name: Build
         run: |
           go mod tidy
           GOOS=js GOARCH=wasm go build -o ./app/main.wasm ./
