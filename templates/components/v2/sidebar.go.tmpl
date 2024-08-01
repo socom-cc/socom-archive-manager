@@ -1,0 +1,5 @@
+{{ define "components/v2/sidebar" }}
+    {{ range $v := . }}
+        <button onclick="socom.openArchive({{$v}});" class="hover:bg-slate-500 text-left">{{$v}}</button>
+    {{ end }}
+{{ end }}

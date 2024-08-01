@@ -1,0 +1,13 @@
+{{ define "pages/v2" }}
+
+        <div class="flex flex-row w-full">
+            <div id="sidebar" class="flex flex-col w-1/4 max-h-[100svh] mx-4 box-border overflow-y-auto">
+            </div>
+            <div class="flex flex-col w-3/4 max-h-[100svh] pe-4 box-border overflow-y-auto">
+                <button onclick="openDirectory()">Open Folder</button>
+                <div id="entry-list"></div>
+                {{ template "components/footer" . }}
+            </div>
+        </div>
+
+{{ end }}

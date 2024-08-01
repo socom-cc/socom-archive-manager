@@ -4,7 +4,7 @@ function attachUploadListeners() {
         reader.onload = function(e) {
             const arrayBuffer = e.target.result;
             const uint8Array = new Uint8Array(arrayBuffer);
-            socom.onload(uint8Array);
+            socom.loadArchive(uint8Array);
         };
         reader.readAsArrayBuffer(file);
     };
