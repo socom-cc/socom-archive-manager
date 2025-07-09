@@ -43,4 +43,16 @@ async function openDirectory() {
 }
 
 (async () => {
-})()
+    socom.download = (idx) => {
+        const ret = socom.getBytes(idx);
+
+        const blob = new Blob([ret.data], { type: 'application/octet-stream' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${ret.name}.bin`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    };
+})();
